@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve a Table | Savoria</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">Savoria<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="reservation.html" class="active">Table Booking</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container" style="max-width: 600px;">
+    <h1>Book Your Table</h1>
+    <p style="color:var(--muted); margin-bottom: 2rem;">Reserve a table in advance to avoid waiting lines.</p>
+
+    <form id="reservationForm" class="card card-body">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="resName" class="form-control" required placeholder="Muhammad Waleed">
+      </div>
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" id="resPhone" class="form-control" required placeholder="+92 328 4461097">
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="resDate" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>Time Slot</label>
+        <select id="resTime" class="form-control" required>
+          <option value="19:00">7:00 PM</option>
+          <option value="20:00">8:00 PM</option>
+          <option value="21:00">9:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Number of Guests</label>
+        <input type="number" id="resGuests" class="form-control" min="1" max="12" value="2" required>
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%;">Confirm Table Reservation</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Savoria Restaurant. Built by Rehmat Developers.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
