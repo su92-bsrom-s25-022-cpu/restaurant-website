@@ -1,36 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Menu | Savoria</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoria - Fine Dining Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Savoria</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="tracking.html">Track Order</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="operating-status" id="operatingStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Open Now</span>
+                </div>
+                <a href="checkout.html" class="cart-btn" id="cartBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-  <nav class="navbar">
-    <a href="index.html" class="logo">Savoria<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="menu.html" class="active">Menu</a></li>
-      <li><a href="reservation.html">Table Booking</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button id="cartBtn" class="btn-primary">Cart (<span id="cartCount">0</span>)</button>
-  </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-slider" id="heroSlider">
+            <div class="hero-slide active" style="background-image: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(15,23,42,0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920');">
+                <div class="hero-content">
+                    <span class="hero-badge">✨ Welcome to Savoria</span>
+                    <h1 class="hero-title">Experience <span class="text-gradient">Culinary</span> Excellence</h1>
+                    <p class="hero-desc">Where every dish tells a story. Savor the finest flavors crafted by world-class chefs using the freshest ingredients.</p>
+                    <div class="hero-actions">
+                        <a href="menu.html" class="btn btn-primary btn-lg">
+                            <span>Explore Menu</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="reservation.html" class="btn btn-glass btn-lg">
+                            <span>Book a Table</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Years Experience</span></div>
+                        <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Menu Items</span></div>
+                        <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Happy Customers</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" style="background-image: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(15,23,42,0.6)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920');">
+                <div class="hero-content">
+                    <span class="hero-badge">🍽️ Chef's Special</span>
+                    <h1 class="hero-title">Taste the <span class="text-gradient">Magic</span> Tonight</h1>
+                    <p class="hero-desc">Indulge in our chef's exclusive creations, prepared with passion and served with perfection.</p>
+                    <div class="hero-actions">
+                        <a href="menu.html" class="btn btn-primary btn-lg"><span>Order Now</span></a>
+                        <a href="reservation.html" class="btn btn-glass btn-lg"><span>Reserve Table</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" style="background-image: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(15,23,42,0.6)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920');">
+                <div class="hero-content">
+                    <span class="hero-badge">🥂 Fine Dining</span>
+                    <h1 class="hero-title">Luxury <span class="text-gradient">Dining</span> Awaits</h1>
+                    <p class="hero-desc">An unforgettable atmosphere paired with extraordinary cuisine. Your perfect evening starts here.</p>
+                    <div class="hero-actions">
+                        <a href="menu.html" class="btn btn-primary btn-lg"><span>View Specials</span></a>
+                        <a href="contact.html" class="btn btn-glass btn-lg"><span>Contact Us</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slider-dots" id="heroSliderDots"></div>
+        <div class="hero-slider-arrows">
+            <button class="slider-arrow prev" id="heroPrev">❮</button>
+            <button class="slider-arrow next" id="heroNext">❯</button>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-  <div class="container">
-    <h1 style="margin-bottom: 2rem;">Explore Our Delicious Menu</h1>
-    
-    <div class="grid" id="menuItems">
-      <!-- Dynamic Javascript Items Output Here -->
+    <!-- Chef's Specials -->
+    <section class="section" id="specials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🔥 Trending Now</span>
+                <h2 class="section-title">Chef's <span class="text-gradient">Specials</span></h2>
+                <p class="section-desc">Hand-picked favorites by our master chefs, crafted to perfection</p>
+            </div>
+            <div class="specials-carousel" id="specialsCarousel">
+                <div class="carousel-track" id="specialsTrack">
+                    <!-- Populated by JS -->
+                </div>
+                <button class="carousel-btn carousel-prev" id="specialsPrev">❮</button>
+                <button class="carousel-btn carousel-next" id="specialsNext">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section section-alt" id="whyUs">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">💎 Why Savoria</span>
+                <h2 class="section-title">Why Choose <span class="text-gradient">Us</span></h2>
+                <p class="section-desc">We don't just serve food — we create unforgettable experiences</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning Fast Delivery</h3>
+                    <p>Hot & fresh food delivered to your doorstep within 30 minutes or it's free!</p>
+                    <div class="feature-glow"></div>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="100">
+                    <div class="feature-icon">👨‍🍳</div>
+                    <h3>Master Chefs</h3>
+                    <p>Our team of 20+ internationally trained chefs bring world-class expertise to every plate.</p>
+                    <div class="feature-glow"></div>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="200">
+                    <div class="feature-icon">🧼</div>
+                    <h3>Hygienic Cooking</h3>
+                    <p>5-star hygiene certified kitchen with transparent food preparation standards.</p>
+                    <div class="feature-glow"></div>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="300">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>Farm-to-table organic ingredients sourced daily from local and international suppliers.</p>
+                    <div class="feature-glow"></div>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="400">
+                    <div class="feature-icon">🎉</div>
+                    <h3>Event Catering</h3>
+                    <p>Customized catering for weddings, corporate events, and private celebrations.</p>
+                    <div class="feature-glow"></div>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="500">
+                    <div class="feature-icon">💳</div>
+                    <h3>Easy Payments</h3>
+                    <p>Multiple payment options including cards, cash, and WhatsApp ordering.</p>
+                    <div class="feature-glow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">⭐ Reviews</span>
+                <h2 class="section-title">What Our <span class="text-gradient">Guests</span> Say</h2>
+                <p class="section-desc">Real stories from our valued customers</p>
+            </div>
+            <div class="testimonials-carousel" id="testimonialsCarousel">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="testimonial-dots" id="testimonialDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick CTA -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-content">
+                    <h2>Ready to Experience <span class="text-gradient">Savoria</span>?</h2>
+                    <p>Book your table now or order online for a taste of luxury</p>
+                    <div class="cta-actions">
+                        <a href="reservation.html" class="btn btn-primary btn-lg"><span>Book a Table</span></a>
+                        <a href="menu.html" class="btn btn-glass btn-lg"><span>Order Online</span></a>
+                    </div>
+                </div>
+                <div class="cta-deco">
+                    <div class="cta-circle"></div>
+                    <div class="cta-circle c2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <span class="logo-icon">🔥</span>
+                        <span class="logo-text">Savoria</span>
+                    </a>
+                    <p class="footer-about">Experience the finest dining with our world-class cuisine, exceptional service, and unforgettable ambiance.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link">FB</a>
+                        <a href="#" class="social-link">IG</a>
+                        <a href="#" class="social-link">TW</a>
+                        <a href="#" class="social-link">YT</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Our Menu</a></li>
+                        <li><a href="reservation.html">Reservations</a></li>
+                        <li><a href="tracking.html">Track Order</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Operating Hours</h4>
+                    <ul class="hours-list">
+                        <li><span>Mon - Fri</span><span>11:00 AM - 11:00 PM</span></li>
+                        <li><span>Saturday</span><span>10:00 AM - 12:00 AM</span></li>
+                        <li><span>Sunday</span><span>12:00 PM - 10:00 PM</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-list">
+                        <li>📍 Raja Jang, Kasur, Pakistan</li>
+                        <li>📞 +92 (328) 4461097</li>
+                        <li>✉️ info@savoria.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Savoria. Crafted with ❤️ by <strong>Rehmat Developers</strong> | Lead: Muhammad Waleed</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>🛒 Your Cart</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose">&times;</button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody">
+            <!-- Populated by JS -->
+        </div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="drawerSubtotal">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn btn-primary btn-block">Proceed to Checkout</a>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2026 Savoria Restaurant. Built by Rehmat Developers.</p>
-  </footer>
+    <script src="app.js"></script>
+    <script>
+        // Hero Slider
+        (function() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dotsContainer = document.getElementById('heroSliderDots');
+            let current = 0;
+            let interval;
 
-  <script src="js/main.js"></script>
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.classList.add('slider-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
+            });
+
+            function goTo(index) {
+                slides[current].classList.remove('active');
+                dotsContainer.children[current].classList.remove('active');
+                current = (index + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                dotsContainer.children[current].classList.add('active');
+                resetInterval();
+            }
+
+            function resetInterval() {
+                clearInterval(interval);
+                interval = setInterval(() => goTo(current + 1), 5000);
+            }
+
+            document.getElementById('heroPrev').addEventListener('click', () => goTo(current - 1));
+            document.getElementById('heroNext').addEventListener('click', () => goTo(current + 1));
+            resetInterval();
+        })();
+
+        // Chef's Specials Carousel
+        (function() {
+            const specials = [
+                { name: "Truffle Wagyu Steak", price: 45.99, image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400", badge: "Chef's Pick", rating: 4.9, spicy: 1 },
+                { name: "Lobster Thermidor", price: 52.99, image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400", badge: "Trending", rating: 4.8, spicy: 0 },
+                { name: "Saffron Risotto", price: 28.99, image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=400", badge: "Veg", rating: 4.7, spicy: 1 },
+                { name: "Dragon Roll Sushi", price: 34.99, image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400", badge: "Popular", rating: 4.9, spicy: 2 },
+                { name: "Tiramisu Tower", price: 18.99, image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400", badge: "Dessert", rating: 4.8, spicy: 0 },
+                { name: "Grilled Salmon Fillet", price: 38.99, image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400", badge: "Healthy", rating: 4.7, spicy: 1 }
+            ];
+
+            const track = document.getElementById('specialsTrack');
+            specials.forEach(item => {
+                const spicyDots = '🌶️'.repeat(item.spicy);
+                track.innerHTML += `
+                    <div class="special-card">
+                        <div class="special-img">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy">
+                            <span class="special-badge">${item.badge}</span>
+                        </div>
+                        <div class="special-info">
+                            <h3>${item.name}</h3>
+                            <div class="special-meta">
+                                <span class="special-rating">⭐ ${item.rating}</span>
+                                ${spicyDots ? `<span class="special-spicy">${spicyDots}</span>` : ''}
+                            </div>
+                            <div class="special-bottom">
+                                <span class="special-price">$${item.price.toFixed(2)}</span>
+                                <button class="btn btn-primary btn-sm add-to-cart-btn" onclick="addToCart({id:'sp-${item.name.replace(/\s/g,'')}', name:'${item.name}', price:${item.price}, image:'${item.image}'})">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let scrollPos = 0;
+            const cardWidth = 320;
+            document.getElementById('specialsNext').addEventListener('click', () => {
+                scrollPos = Math.min(scrollPos + cardWidth, track.scrollWidth - track.offsetWidth);
+                track.style.transform = `translateX(-${scrollPos}px)`;
+            });
+            document.getElementById('specialsPrev').addEventListener('click', () => {
+                scrollPos = Math.max(scrollPos - cardWidth, 0);
+                track.style.transform = `translateX(-${scrollPos}px)`;
+            });
+        })();
+
+        // Testimonials
+        (function() {
+            const testimonials = [
+                { name: "Sarah Johnson", role: "Food Blogger", text: "Absolutely divine! The Wagyu steak melted in my mouth. Savoria has set a new standard for fine dining. Will definitely return!", rating: 5, avatar: "SJ" },
+                { name: "Ahmed Khan", role: "Regular Customer", text: "Best restaurant experience in the city. The ambiance, service, and food quality are consistently outstanding. My family's favorite spot!", rating: 5, avatar: "AK" },
+                { name: "Emily Chen", role: "Food Critic", text: "The attention to detail in every dish is remarkable. From presentation to flavor profiles, Savoria delivers perfection every single time.", rating: 5, avatar: "EC" },
+                { name: "Michael Brown", role: "Business Executive", text: "Perfect venue for business dinners. The VIP lounge is exceptional, and the staff ensures every detail is handled professionally.", rating: 4, avatar: "MB" },
+                { name: "Fatima Ali", role: "Lifestyle Influencer", text: "The rooftop dining with garden view is magical! Every photo is Instagram-worthy, and the taste matches the stunning presentation.", rating: 5, avatar: "FA" }
+            ];
+
+            const track = document.getElementById('testimonialTrack');
+            const dots = document.getElementById('testimonialDots');
+            let currentTest = 0;
+
+            testimonials.forEach((t, i) => {
+                const stars = '⭐'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
+                track.innerHTML += `
+                    <div class="testimonial-card ${i === 0 ? 'active' : ''}">
+                        <div class="testimonial-stars">${stars}</div>
+                        <p class="testimonial-text">"${t.text}"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">${t.avatar}</div>
+                            <div>
+                                <h4>${t.name}</h4>
+                                <span>${t.role}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const dot = document.createElement('button');
+                dot.classList.add('t-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToTest(i));
+                dots.appendChild(dot);
+            });
+
+            function goToTest(index) {
+                document.querySelectorAll('.testimonial-card')[currentTest].classList.remove('active');
+                dots.children[currentTest].classList.remove('active');
+                currentTest = index;
+                document.querySelectorAll('.testimonial-card')[currentTest].classList.add('active');
+                dots.children[currentTest].classList.add('active');
+            }
+
+            setInterval(() => {
+                goToTest((currentTest + 1) % testimonials.length);
+            }, 4000);
+        })();
+    </script>
 </body>
 </html>
