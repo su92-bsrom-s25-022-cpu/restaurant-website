@@ -1,42 +1,75 @@
-// Sample Local Menu Data (Will connect to Render Backend later)
-const menuItems = [
-  { id: 1, name: "Gourmet Beef Burger", price: 12.99, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" },
-  { id: 2, name: "Margherita Pizza", price: 14.50, image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=500&q=80" },
-  { id: 3, name: "Creamy Alfredo Pasta", price: 11.00, image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281216?auto=format&fit=crop&w=500&q=80" }
-];
+// Apni Render App ka URL yahan replace karein
+const API_URL = "https://savoria-restaurant-api.onrender.com";
 
 let cart = [];
 
-// Load Menu Dynamic Rendering
 document.addEventListener("DOMContentLoaded", () => {
-  const menuContainer = document.getElementById("menuItems");
-  if(menuContainer) {
-    menuContainer.innerHTML = menuItems.map(item => `
-      <div class="card">
-        <img src="${item.image}" alt="${item.name}">
-        <div class="card-body">
-          <h3>${item.name}</h3>
-          <p style="color: var(--primary); font-weight:bold; margin: 10px 0;">$${item.price.toFixed(2)}</p>
-          <button class="btn-primary" onclick="addToCart(${item.id})">Add to Order</button>
-        </div>
-      </div>
-    `).join("");
-  }
+  fetchMenu();
 
-  // Reservation Handler
+  // Reservation Form Handling
   const resForm = document.getElementById("reservationForm");
-  if(resForm) {
-    resForm.addEventListener("submit", (e) => {
+  if (resForm) {
+    resForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      alert("Table Reservation Request Submitted! Connecting with Backend...");
+      
+      const reservationData = {
+        name: document.getElementById("resName").value,
+        phone: document.getElementById("resPhone").value,
+        date: document.getElementById("resDate").value,
+        time: document.getElementById("resTime").value,
+        guests: document.getElementById("resGuests").value
+      };
+
+      try {
+        const response = await fetch(`${API_URL}/api/reserve`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(reservationData)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert(`Table Reserved Successfully! Your ID: #${result.reservationId}`);
+          resForm.reset();
+        } else {
+          alert("Error: " + result.message);
+        }
+      } catch (err) {
+        alert("Server error, please try again later.");
+      }
     });
   }
 });
 
-function addToCart(id) {
-  const item = menuItems.find(i => i.id === id);
-  cart.push(item);
+// Backend se live menu items fetch karna
+async function fetchMenu() {
+  const menuContainer = document.getElementById("menuItems");
+  if (!menuContainer) return;
+
+  try {
+    const response = await fetch(`${API_URL}/api/menu`);
+    const result = await response.json();
+
+    if (result.success) {
+      menuContainer.innerHTML = result.data.map(item => `
+        <div class="card">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="card-body">
+            <h3>${item.name}</h3>
+            <p style="color: var(--primary); font-weight:bold; margin: 10px 0;">$${item.price.toFixed(2)}</p>
+            <button class="btn-primary" onclick="addToCart(${item.id}, '${item.name}', ${item.price})">Add to Order</button>
+          </div>
+        </div>
+      `).join("");
+    }
+  } catch (err) {
+    menuContainer.innerHTML = "<p>Failed to load menu from server.</p>";
+  }
+}
+
+function addToCart(id, name, price) {
+  cart.push({ id, name, price });
   const cartCount = document.getElementById("cartCount");
-  if(cartCount) cartCount.innerText = cart.length;
-  alert(`${item.name} added to cart!`);
+  if (cartCount) cartCount.innerText = cart.length;
+  alert(`${name} added to cart!`);
 }
