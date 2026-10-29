@@ -1,36 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Menu | Savoria</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoria - Digital Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Savoria</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="tracking.html">Track Order</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="checkout.html" class="cart-btn" id="cartBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-  <nav class="navbar">
-    <a href="index.html" class="logo">Savoria<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="menu.html" class="active">Menu</a></li>
-      <li><a href="reservation.html">Table Booking</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button id="cartBtn" class="btn-primary">Cart (<span id="cartCount">0</span>)</button>
-  </nav>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Our <span class="text-gradient">Menu</span></h1>
+            <p class="page-desc">Discover our carefully curated selection of culinary masterpieces</p>
+        </div>
+    </section>
 
-  <div class="container">
-    <h1 style="margin-bottom: 2rem;">Explore Our Delicious Menu</h1>
-    
-    <div class="grid" id="menuItems">
-      <!-- Dynamic Javascript Items Output Here -->
+    <!-- Menu Section -->
+    <section class="section">
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="menu-search-bar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" id="menuSearch" placeholder="Search for dishes, ingredients, or categories..." class="menu-search-input">
+                <span class="search-shortcut">⌘K</span>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="menu-tabs" id="menuTabs">
+                <button class="menu-tab active" data-category="all">
+                    <span class="tab-icon">🍽️</span> All Items
+                </button>
+                <button class="menu-tab" data-category="starters">
+                    <span class="tab-icon">🥗</span> Starters
+                </button>
+                <button class="menu-tab" data-category="main">
+                    <span class="tab-icon">🥩</span> Main Course
+                </button>
+                <button class="menu-tab" data-category="desserts">
+                    <span class="tab-icon">🍰</span> Desserts
+                </button>
+                <button class="menu-tab" data-category="beverages">
+                    <span class="tab-icon">🥤</span> Beverages
+                </button>
+                <button class="menu-tab" data-category="special">
+                    <span class="tab-icon">⭐</span> Chef's Special
+                </button>
+            </div>
+
+            <!-- Menu Items Counter -->
+            <div class="menu-results-bar">
+                <span id="menuResultCount">Loading menu...</span>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="menu-grid" id="menuGrid">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results" id="noResults" style="display:none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No dishes found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Item Customization Modal -->
+    <div class="modal-overlay" id="customizeModalOverlay">
+        <div class="modal" id="customizeModal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body">
+                <div class="modal-item-header" id="modalItemHeader">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="customization-section">
+                    <h4>🧀 Extra Toppings</h4>
+                    <div class="custom-options">
+                        <label class="custom-option">
+                            <input type="checkbox" name="topping" value="cheese" data-price="1.50">
+                            <span class="option-check"></span>
+                            <span>Extra Cheese (+$1.50)</span>
+                        </label>
+                        <label class="custom-option">
+                            <input type="checkbox" name="topping" value="mushroom" data-price="1.00">
+                            <span class="option-check"></span>
+                            <span>Mushrooms (+$1.00)</span>
+                        </label>
+                        <label class="custom-option">
+                            <input type="checkbox" name="topping" value="jalapeno" data-price="0.75">
+                            <span class="option-check"></span>
+                            <span>Jalapeños (+$0.75)</span>
+                        </label>
+                        <label class="custom-option">
+                            <input type="checkbox" name="topping" value="avocado" data-price="2.00">
+                            <span class="option-check"></span>
+                            <span>Avocado (+$2.00)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="customization-section">
+                    <h4>🌶️ Spice Level</h4>
+                    <div class="spice-options">
+                        <label class="spice-option">
+                            <input type="radio" name="spice" value="mild" checked>
+                            <span class="spice-badge mild">Mild</span>
+                        </label>
+                        <label class="spice-option">
+                            <input type="radio" name="spice" value="medium">
+                            <span class="spice-badge medium">Medium 🌶️</span>
+                        </label>
+                        <label class="spice-option">
+                            <input type="radio" name="spice" value="hot">
+                            <span class="spice-badge hot">Hot 🌶️🌶️</span>
+                        </label>
+                        <label class="spice-option">
+                            <input type="radio" name="spice" value="extreme">
+                            <span class="spice-badge extreme">Extreme 🔥</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="customization-section">
+                    <h4>📏 Portion Size</h4>
+                    <div class="portion-options">
+                        <label class="portion-option">
+                            <input type="radio" name="portion" value="regular" data-multiplier="1" checked>
+                            <span class="portion-badge">Regular</span>
+                        </label>
+                        <label class="portion-option">
+                            <input type="radio" name="portion" value="large" data-multiplier="1.5">
+                            <span class="portion-badge">Large (+50%)</span>
+                        </label>
+                        <label class="portion-option">
+                            <input type="radio" name="portion" value="family" data-multiplier="2.5">
+                            <span class="portion-badge">Family (+150%)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="customization-section">
+                    <h4>📝 Special Instructions</h4>
+                    <textarea class="custom-notes" id="customNotes" placeholder="Any allergies or special requests..."></textarea>
+                </div>
+                <div class="modal-total">
+                    <span>Total:</span>
+                    <span id="modalTotal">$0.00</span>
+                </div>
+                <button class="btn btn-primary btn-block" id="addCustomizedBtn">Add to Cart</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2026 Savoria Restaurant. Built by Rehmat Developers.</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Savoria. Crafted with ❤️ by <strong>Rehmat Developers</strong> | Lead: Muhammad Waleed</p>
+            </div>
+        </div>
+    </footer>
 
-  <script src="js/main.js"></script>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>🛒 Your Cart</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose">&times;</button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody"></div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="drawerSubtotal">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn btn-primary btn-block">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Menu Data (Fallback)
+        const fallbackMenu = [
+            // Starters
+            { id: "s1", name: "Crispy Calamari Rings", price: 12.99, category: "starters", image: "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=400", veg: false, spicy: 1, rating: 4.5, description: "Golden fried squid rings with marinara sauce" },
+            { id: "s2", name: "Bruschetta Trio", price: 10.99, category: "starters", image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=400", veg: true, spicy: 0, rating: 4.6, description: "Toasted bread with tomato, basil & mozzarella" },
+            { id: "s3", name: "Buffalo Wings", price: 14.99, category: "starters", image: "https://images.unsplash.com/photo-1608039829572-9479e1a51300?w=400", veg: false, spicy: 3, rating: 4.8, description: "Spicy glazed wings with blue cheese dip" },
+            { id: "s4", name: "Spring Rolls", price: 9.99, category: "starters", image: "https://images.unsplash.com/photo-1548507200-e9e0e7e50e6f?w=400", veg: true, spicy: 1, rating: 4.3, description: "Crispy vegetable rolls with sweet chili sauce" },
+            { id: "s5", name: "Garlic Prawns", price: 16.99, category: "starters", image: "https://images.unsplash.com/photo-1565680018093-ebb6e41db76d?w=400", veg: false, spicy: 1, rating: 4.7, description: "Sautéed prawns in garlic butter" },
+            // Main Course
+            { id: "m1", name: "Wagyu Beef Steak", price: 45.99, category: "main", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400", veg: false, spicy: 0, rating: 4.9, description: "Premium wagyu with truffle sauce & vegetables" },
+            { id: "m2", name: "Grilled Salmon", price: 38.99, category: "main", image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400", veg: false, spicy: 0, rating: 4.8, description: "Atlantic salmon with lemon dill sauce" },
+            { id: "m3", name: "Chicken Biryani", price: 22.99, category: "main", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400", veg: false, spicy: 2, rating: 4.9, description: "Aromatic basmati rice with tender chicken" },
+            { id: "m4", name: "Mushroom Risotto", price: 24.99, category: "main", image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=400", veg: true, spicy: 0, rating: 4.6, description: "Creamy arborio rice with wild mushrooms" },
+            { id: "m5", name: "Lamb Chops", price: 42.99, category: "main", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400", veg: false, spicy: 1, rating: 4.7, description: "Herb-crusted New Zealand lamb chops" },
+            { id: "m6", name: "Paneer Tikka Masala", price: 19.99, category: "main", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400", veg: true, spicy: 2, rating: 4.5, description: "Cottage cheese in rich tomato gravy" },
+            { id: "m7", name: "Fish & Chips", price: 21.99, category: "main", image: "https://images.unsplash.com/photo-1534766555764-ce878a4e947e?w=400", veg: false, spicy: 0, rating: 4.4, description: "Beer-battered cod with crispy chips" },
+            { id: "m8", name: "Pasta Carbonara", price: 20.99, category: "main", image: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400", veg: false, spicy: 0, rating: 4.6, description: "Creamy pasta with pancetta & parmesan" },
+            // Desserts
+            { id: "d1", name: "Tiramisu", price: 12.99, category: "desserts", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400", veg: true, spicy: 0, rating: 4.8, description: "Classic Italian coffee-flavored dessert" },
+            { id: "d2", name: "Chocolate Lava Cake", price: 14.99, category: "desserts", image: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400", veg: true, spicy: 0, rating: 4.9, description: "Warm chocolate cake with molten center" },
+            { id: "d3", name: "Crème Brûlée", price: 11.99, category: "desserts", image: "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=400", veg: true, spicy: 0, rating: 4.7, description: "French vanilla custard with caramelized sugar" },
+            { id: "d4", name: "Mango Cheesecake", price: 13.99, category: "desserts", image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400", veg: true, spicy: 0, rating: 4.5, description: "Creamy cheesecake with fresh mango topping" },
+            // Beverages
+            { id: "b1", name: "Mango Smoothie", price: 7.99, category: "beverages", image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=400", veg: true, spicy: 0, rating: 4.6, description: "Fresh mango blended with yogurt" },
+            { id: "b2", name: "Iced Matcha Latte", price: 6.99, category: "beverages", image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=400", veg: true, spicy: 0, rating: 4.5, description: "Premium matcha with oat milk" },
+            { id: "b3", name: "Fresh Mint Mojito", price: 8.99, category: "beverages", image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400", veg: true, spicy: 0, rating: 4.7, description: "Refreshing mint with lime & soda" },
+            { id: "b4", name: "Espresso Martini", price: 12.99, category: "beverages", image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400", veg: true, spicy: 0, rating: 4.8, description: "Rich espresso cocktail" },
+            // Chef's Special
+            { id: "cs1", name: "Truffle Lobster Risotto", price: 58.99, category: "special", image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400", veg: false, spicy: 0, rating: 5.0, description: "Black truffle risotto with Maine lobster tail" },
+            { id: "cs2", name: "Dragon Fire Sushi Platter", price: 42.99, category: "special", image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400", veg: false, spicy: 3, rating: 4.9, description: "12-piece premium sushi with dragon sauce" },
+            { id: "cs3", name: "Gold Leaf Chocolate Sphere", price: 24.99, category: "special", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400", veg: true, spicy: 0, rating: 4.9, description: "24K gold chocolate dome with raspberry" },
+        ];
+
+        let menuItems = [];
+        let currentCategory = 'all';
+        let currentSearch = '';
+        let selectedItem = null;
+
+        // Fetch menu from API with fallback
+        async function fetchMenu() {
+            try {
+                const response = await fetch('https://savoria-restaurant-api.onrender.com/api/menu', { 
+                    signal: AbortSignal.timeout(5000) 
+                });
+                if (!response.ok) throw new Error('API error');
+                const data = await response.json();
+                menuItems = data.length ? data : fallbackMenu;
+            } catch (e) {
+                console.log('Using fallback menu data');
+                menuItems = fallbackMenu;
+            }
+            renderMenu();
+        }
+
+        function renderMenu() {
+            const grid = document.getElementById('menuGrid');
+            const noResults = document.getElementById('noResults');
+            const countEl = document.getElementById('menuResultCount');
+
+            let filtered = menuItems;
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(item => item.category === currentCategory);
+            }
+            if (currentSearch) {
+                const q = currentSearch.toLowerCase();
+                filtered = filtered.filter(item =>
+                    item.name.toLowerCase().includes(q) ||
+                    item.description.toLowerCase().includes(q) ||
+                    item.category.toLowerCase().includes(q)
+                );
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                countEl.textContent = 'No items found';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            countEl.textContent = `Showing ${filtered.length} item${filtered.length > 1 ? 's' : ''}`;
+
+            grid.innerHTML = filtered.map(item => {
+                const spicyIndicator = item.spicy > 0 ? `<span class="spicy-level">${'🌶️'.repeat(item.spicy)}</span>` : '';
+                const vegBadge = item.veg ? '<span class="veg-badge">🟢 Veg</span>' : '<span class="nonveg-badge">🔴 Non-Veg</span>';
+                return `
+                    <div class="menu-card" data-category="${item.category}">
+                        <div class="menu-card-img">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy">
+                            <div class="menu-card-overlay">
+                                <button class="btn btn-glass btn-sm" onclick="openCustomizeModal('${item.id}')">Customize</button>
+                            </div>
+                        </div>
+                        <div class="menu-card-body">
+                            <div class="menu-card-badges">
+                                ${vegBadge}
+                                ${spicyIndicator}
+                            </div>
+                            <h3 class="menu-card-title">${item.name}</h3>
+                            <p class="menu-card-desc">${item.description}</p>
+                            <div class="menu-card-footer">
+                                <div class="menu-card-price-rating">
+                                    <span class="menu-card-price">$${item.price.toFixed(2)}</span>
+                                    <span class="menu-card-rating">⭐ ${item.rating}</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm add-to-cart-btn" onclick="addToCart({id:'${item.id}', name:'${item.name}', price:${item.price}, image:'${item.image}'})">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Category Tabs
+        document.getElementById('menuTabs').addEventListener('click', (e) => {
+            const tab = e.target.closest('.menu-tab');
+            if (!tab) return;
+            document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentCategory = tab.dataset.category;
+            renderMenu();
+        });
+
+        // Live Search
+        document.getElementById('menuSearch').addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderMenu();
+        });
+
+        // Customize Modal
+        function openCustomizeModal(itemId) {
+            selectedItem = menuItems.find(i => i.id === itemId);
+            if (!selectedItem) return;
+
+            const header = document.getElementById('modalItemHeader');
+            header.innerHTML = `
+                <img src="${selectedItem.image}" alt="${selectedItem.name}" class="modal-item-img">
+                <div>
+                    <h3>${selectedItem.name}</h3>
+                    <p>${selectedItem.description}</p>
+                    <span class="modal-base-price">Base: $${selectedItem.price.toFixed(2)}</span>
+                </div>
+            `;
+            updateModalTotal();
+            document.getElementById('customizeModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCustomizeModal() {
+            document.getElementById('customizeModalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            // Reset form
+            document.querySelectorAll('#customizeModal input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelector('#customizeModal input[name="spice"][value="mild"]').checked = true;
+            document.querySelector('#customizeModal input[name="portion"][value="regular"]').checked = true;
+            document.getElementById('customNotes').value = '';
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeCustomizeModal);
+        document.getElementById('customizeModalOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeCustomizeModal();
+        });
+
+        function updateModalTotal() {
+            if (!selectedItem) return;
+            let total = selectedItem.price;
+            document.querySelectorAll('#customizeModal input[name="topping"]:checked').forEach(cb => {
+                total += parseFloat(cb.dataset.price);
+            });
+            const portion = document.querySelector('#customizeModal input[name="portion"]:checked');
+            if (portion) total *= parseFloat(portion.dataset.multiplier);
+            document.getElementById('modalTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        document.querySelectorAll('#customizeModal input').forEach(input => {
+            input.addEventListener('change', updateModalTotal);
+        });
+
+        document.getElementById('addCustomizedBtn').addEventListener('click', () => {
+            if (!selectedItem) return;
+            let total = selectedItem.price;
+            const toppings = [];
+            document.querySelectorAll('#customizeModal input[name="topping"]:checked').forEach(cb => {
+                total += parseFloat(cb.dataset.price);
+                toppings.push(cb.value);
+            });
+            const portion = document.querySelector('#customizeModal input[name="portion"]:checked');
+            if (portion) total *= parseFloat(portion.dataset.multiplier);
+            const spice = document.querySelector('#customizeModal input[name="spice"]:checked').value;
+            const notes = document.getElementById('customNotes').value;
+
+            const customItem = {
+                id: selectedItem.id + '-' + Date.now(),
+                name: selectedItem.name + (portion.value !== 'regular' ? ` (${portion.value})` : ''),
+                price: parseFloat(total.toFixed(2)),
+                image: selectedItem.image,
+                customizations: { toppings, spice, portion: portion.value, notes }
+            };
+            addToCart(customItem);
+            closeCustomizeModal();
+        });
+
+        fetchMenu();
+    </script>
 </body>
 </html>
