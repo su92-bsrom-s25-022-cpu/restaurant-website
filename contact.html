@@ -1,44 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us | Savoria</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoria - Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Savoria</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="tracking.html">Track Order</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="checkout.html" class="cart-btn" id="cartBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-  <nav class="navbar">
-    <a href="index.html" class="logo">Savoria<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="menu.html">Menu</a></li>
-      <li><a href="reservation.html">Table Booking</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Get in <span class="text-gradient">Touch</span></h1>
+            <p class="page-desc">We'd love to hear from you. Reach out anytime!</p>
+        </div>
+    </section>
 
-  <div class="container">
-    <h1>Contact & Location</h1>
-    <div class="grid">
-      <div class="card card-body">
-        <h3>Visit Our Restaurant</h3>
-        <p style="color:var(--muted); margin-top:10px;">Main Boulevard, Lahore, Pakistan</p>
-        <p style="color:var(--muted); margin-top:5px;">Phone: +92 328 4461097</p>
-        <p style="color:var(--muted); margin-top:5px;">Email: contact@savoria.com</p>
-      </div>
-      <div class="card card-body">
-        <h3>Opening Hours</h3>
-        <p style="color:var(--muted); margin-top:10px;">Monday - Thursday: 12:00 PM - 11:00 PM</p>
-        <p style="color:var(--muted); margin-top:5px;">Friday - Sunday: 12:00 PM - 01:00 AM</p>
-      </div>
-    </div>
-  </div>
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Contact Form -->
+                <div class="contact-form-card">
+                    <h3>📱 Send us a Message via WhatsApp</h3>
+                    <p class="contact-form-desc">Fill the form and it will open WhatsApp with your message pre-filled</p>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" class="form-input" id="contactName" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Your Email</label>
+                                <input type="email" class="form-input" id="contactEmail" placeholder="john@email.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <select class="form-input" id="contactSubject">
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Reservation Query">Reservation Query</option>
+                                <option value="Order Issue">Order Issue</option>
+                                <option value="Catering Request">Catering Request</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Partnership">Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-input form-textarea" id="contactMessage" placeholder="Write your message here..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            📱 Send via WhatsApp
+                        </button>
+                    </form>
+                </div>
 
-  <footer>
-    <p>&copy; 2026 Savoria Restaurant. Built by Rehmat Developers.</p>
-  </footer>
+                <!-- Contact Info -->
+                <div class="contact-info-side">
+                    <div class="contact-info-card">
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">📍</div>
+                            <div>
+                                <h4>Our Location</h4>
+                                <p>Raja Jang, Kasur, Pakistan</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">📞</div>
+                            <div>
+                                <h4>Phone Number</h4>
+                                <p><a href="tel:+923284461097">+92 (328) 4461097</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">✉️</div>
+                            <div>
+                                <h4>Email Address</h4>
+                                <p><a href="mailto:info@savoria.com">info@savoria.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">🕐</div>
+                            <div>
+                                <h4>Operating Hours</h4>
+                                <p>Mon-Fri: 11AM-11PM<br>Sat: 10AM-12AM<br>Sun: 12PM-10PM</p>
+                            </div>
+                        </div>
+                    </div>
 
-  <script src="js/main.js"></script>
+                    <!-- Social Media -->
+                    <div class="social-card">
+                        <h4>Follow Us</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link-large" title="Facebook">
+                                <span>📘</span> Facebook
+                            </a>
+                            <a href="#" class="social-link-large" title="Instagram">
+                                <span>📸</span> Instagram
+                            </a>
+                            <a href="#" class="social-link-large" title="Twitter">
+                                <span>🐦</span> Twitter
+                            </a>
+                            <a href="#" class="social-link-large" title="YouTube">
+                                <span>📺</span> YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="map-section">
+                <h3 class="map-title">📍 Find Us Here</h3>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27260.145289815076!2d74.21!3d31.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919011d0ee8c7a1%3A0x3d5e0b1e2eb76e2a!2sRaja%20Jang%2C%20Kasur%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0; border-radius: 16px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <span class="logo-icon">🔥</span>
+                        <span class="logo-text">Savoria</span>
+                    </a>
+                    <p class="footer-about">Experience the finest dining with our world-class cuisine, exceptional service, and unforgettable ambiance.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Our Menu</a></li>
+                        <li><a href="reservation.html">Reservations</a></li>
+                        <li><a href="tracking.html">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="contact-list">
+                        <li>📍 Raja Jang, Kasur</li>
+                        <li>📞 +92 (328) 4461097</li>
+                        <li>✉️ info@savoria.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Savoria. Crafted with ❤️ by <strong>Rehmat Developers</strong> | Lead: Muhammad Waleed</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+
+            const waMessage = encodeURIComponent(
+                `🔥 *SAVORIA - ${subject}*\n\n` +
+                `*Name:* ${name}\n` +
+                `*Email:* ${email}\n\n` +
+                `*Message:*\n${message}`
+            );
+
+            window.open(`https://wa.me/923284461097?text=${waMessage}`, '_blank');
+            showToast('Opening WhatsApp...', 'success');
+        });
+    </script>
 </body>
 </html>
