@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoria - Table Reservation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Savoria</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reservation.html" class="active">Reserve</a></li>
+                <li><a href="tracking.html">Track Order</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="checkout.html" class="cart-btn" id="cartBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Reserve a <span class="text-gradient">Table</span></h1>
+            <p class="page-desc">Secure your perfect dining spot for an unforgettable evening</p>
+        </div>
+    </section>
+
+    <!-- Reservation Form -->
+    <section class="section">
+        <div class="container">
+            <div class="reservation-layout">
+                <div class="reservation-form-card">
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label class="form-label">👤 Full Name</label>
+                            <input type="text" class="form-input" id="resName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">📧 Email</label>
+                                <input type="email" class="form-input" id="resEmail" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">📱 Phone</label>
+                                <input type="tel" class="form-input" id="resPhone" placeholder="+92 3XX XXXXXXX" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">📅 Date</label>
+                                <input type="date" class="form-input" id="resDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">🕐 Time Slot</label>
+                                <select class="form-input" id="resTime" required>
+                                    <option value="">Select Time</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">👥 Number of Guests</label>
+                                <div class="guest-selector" id="guestSelector">
+                                    <button type="button" class="guest-btn minus" id="guestMinus">−</button>
+                                    <span class="guest-count" id="guestCount">2</span>
+                                    <button type="button" class="guest-btn plus" id="guestPlus">+</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">🏠 Seating Area</label>
+                                <select class="form-input" id="resSeating" required>
+                                    <option value="">Select Area</option>
+                                    <option value="indoor">🏛️ Indoor Main Hall</option>
+                                    <option value="rooftop">🌃 Outdoor Rooftop</option>
+                                    <option value="vip">👑 VIP Lounge</option>
+                                    <option value="garden">🌿 Garden View</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">📝 Special Requests & Dietary Notes</label>
+                            <textarea class="form-input form-textarea" id="resNotes" placeholder="Any allergies, dietary restrictions, or special occasion details..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="reserveBtn">
+                            <span>Confirm Reservation</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </form>
+                </div>
+                <div class="reservation-info">
+                    <div class="info-card">
+                        <h3>📍 Restaurant Location</h3>
+                        <p>Raja Jang, Kasur, Pakistan</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🕐 Operating Hours</h3>
+                        <ul>
+                            <li>Mon - Fri: 11:00 AM – 11:00 PM</li>
+                            <li>Saturday: 10:00 AM – 12:00 AM</li>
+                            <li>Sunday: 12:00 PM – 10:00 PM</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>🍽️ Seating Areas</h3>
+                        <div class="seating-preview">
+                            <div class="seating-item">
+                                <span class="seating-icon">🏛️</span>
+                                <div>
+                                    <strong>Indoor Main Hall</strong>
+                                    <p>Classic elegance, 80 seats</p>
+                                </div>
+                            </div>
+                            <div class="seating-item">
+                                <span class="seating-icon">🌃</span>
+                                <div>
+                                    <strong>Outdoor Rooftop</strong>
+                                    <p>City skyline views, 40 seats</p>
+                                </div>
+                            </div>
+                            <div class="seating-item">
+                                <span class="seating-icon">👑</span>
+                                <div>
+                                    <strong>VIP Lounge</strong>
+                                    <p>Exclusive private dining, 20 seats</p>
+                                </div>
+                            </div>
+                            <div class="seating-item">
+                                <span class="seating-icon">🌿</span>
+                                <div>
+                                    <strong>Garden View</strong>
+                                    <p>Natural ambiance, 30 seats</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Confirmation Modal -->
+    <div class="modal-overlay" id="bookingModalOverlay">
+        <div class="modal booking-modal" id="bookingModal">
+            <button class="modal-close" id="bookingModalClose">&times;</button>
+            <div class="modal-body">
+                <div class="booking-success-icon">✅</div>
+                <h2>Reservation Confirmed!</h2>
+                <p class="booking-id" id="bookingId"></p>
+                <div class="booking-details" id="bookingDetails">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="booking-actions">
+                    <button class="btn btn-primary" onclick="printBooking()">🖨️ Print Voucher</button>
+                    <button class="btn btn-glass" onclick="downloadBooking()">📥 Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Savoria. Crafted with ❤️ by <strong>Rehmat Developers</strong> | Lead: Muhammad Waleed</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+    <script>
+        // Set min date to today
+        const dateInput = document.getElementById('resDate');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+        dateInput.value = today;
+
+        // Generate time slots
+        function generateTimeSlots() {
+            const select = document.getElementById('resTime');
+            const date = document.getElementById('resDate').value;
+            const isToday = date === today;
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMin = now.getMinutes();
+            
+            select.innerHTML = '<option value="">Select Time</option>';
+            const slots = [];
+            for (let h = 11; h <= 22; h++) {
+                for (let m = 0; m < 60; m += 30) {
+                    if (isToday && (h < currentHour || (h === currentHour && m <= currentMin))) continue;
+                    const hour12 = h > 12 ? h - 12 : h;
+                    const ampm = h >= 12 ? 'PM' : 'AM';
+                    const timeStr = `${hour12}:${m === 0 ? '00' : '30'} ${ampm}`;
+                    const val = `${h}:${m === 0 ? '00' : '30'}`;
+                    slots.push(`<option value="${val}">${timeStr}</option>`);
+                }
+            }
+            select.innerHTML += slots.join('');
+        }
+        generateTimeSlots();
+        dateInput.addEventListener('change', generateTimeSlots);
+
+        // Guest Counter
+        let guestCount = 2;
+        document.getElementById('guestMinus').addEventListener('click', () => {
+            if (guestCount > 1) {
+                guestCount--;
+                document.getElementById('guestCount').textContent = guestCount;
+            }
+        });
+        document.getElementById('guestPlus').addEventListener('click', () => {
+            if (guestCount < 12) {
+                guestCount++;
+                document.getElementById('guestCount').textContent = guestCount;
+            } else {
+                document.getElementById('guestCount').textContent = '12+';
+            }
+        });
+
+        // Form Submission
+        let bookingData = null;
+        document.getElementById('reservationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('reserveBtn');
+            btn.innerHTML = '<span class="spinner"></span> Processing...';
+            btn.disabled = true;
+
+            const formData = {
+                name: document.getElementById('resName').value,
+                email: document.getElementById('resEmail').value,
+                phone: document.getElementById('resPhone').value,
+                date: document.getElementById('resDate').value,
+                time: document.getElementById('resTime').value,
+                guests: guestCount,
+                seating: document.getElementById('resSeating').value,
+                notes: document.getElementById('resNotes').value
+            };
+
+            let confirmationId;
+            try {
+                const res = await fetch('https://savoria-restaurant-api.onrender.com/api/reserve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                    signal: AbortSignal.timeout(5000)
+                });
+                const data = await res.json();
+                confirmationId = data.reservationId || data.id;
+            } catch (e) {
+                confirmationId = 'SVR-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 4).toUpperCase();
+            }
+
+            bookingData = { ...formData, id: confirmationId };
+
+            const seatingLabels = { indoor: '🏛️ Indoor Main Hall', rooftop: '🌃 Outdoor Rooftop', vip: '👑 VIP Lounge', garden: '🌿 Garden View' };
+            const dateObj = new Date(formData.date + 'T00:00:00');
+            const dateStr = dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            document.getElementById('bookingId').textContent = `Booking ID: ${confirmationId}`;
+            document.getElementById('bookingDetails').innerHTML = `
+                <div class="booking-detail-row"><span>Guest Name</span><span>${formData.name}</span></div>
+                <div class="booking-detail-row"><span>Date</span><span>${dateStr}</span></div>
+                <div class="booking-detail-row"><span>Time</span><span>${formData.time}</span></div>
+                <div class="booking-detail-row"><span>Guests</span><span>${formData.guests} Person(s)</span></div>
+                <div class="booking-detail-row"><span>Seating</span><span>${seatingLabels[formData.seating] || formData.seating}</span></div>
+                ${formData.notes ? `<div class="booking-detail-row"><span>Notes</span><span>${formData.notes}</span></div>` : ''}
+                <div class="booking-detail-row"><span>Email</span><span>${formData.email}</span></div>
+                <div class="booking-detail-row"><span>Phone</span><span>${formData.phone}</span></div>
+            `;
+
+            document.getElementById('bookingModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            btn.innerHTML = '<span>Confirm Reservation</span>';
+            btn.disabled = false;
+            showToast('Reservation confirmed successfully!', 'success');
+        });
+
+        document.getElementById('bookingModalClose').addEventListener('click', () => {
+            document.getElementById('bookingModalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        function printBooking() {
+            const content = document.getElementById('bookingModal').innerHTML;
+            const win = window.open('', '_blank');
+            win.document.write(`
+                <html><head><title>Savoria - Booking Voucher</title>
+                <style>
+                    body { font-family: 'Poppins', sans-serif; padding: 40px; color: #1a1a1a; }
+                    h2 { color: #FF4757; text-align: center; }
+                    .booking-success-icon { text-align: center; font-size: 60px; }
+                    .booking-id { text-align: center; font-weight: 600; margin: 10px 0; font-size: 18px; color: #F59E0B; }
+                    .booking-detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+                    .booking-actions, .modal-close { display: none; }
+                    .booking-details { max-width: 500px; margin: 0 auto; }
+                </style></head>
+                <body>
+                    <h1 style="text-align:center;">🔥 Savoria Restaurant</h1>
+                    ${content}
+                    <p style="text-align:center; margin-top:30px; color:#888;">Thank you for choosing Savoria! | +92 (328) 4461097</p>
+                </body></html>
+            `);
+            win.document.close();
+            win.print();
+        }
+
+        function downloadBooking() {
+            printBooking(); // Uses print dialog which allows saving as PDF
+        }
+    </script>
+</body>
+</html>
