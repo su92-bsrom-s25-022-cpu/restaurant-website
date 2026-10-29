@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoria - Track Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Savoria</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="tracking.html" class="active">Track Order</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="checkout.html" class="cart-btn" id="cartBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Track Your <span class="text-gradient">Order</span></h1>
+            <p class="page-desc">Real-time updates on your order status</p>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="section">
+        <div class="container">
+            <div class="tracking-search-card">
+                <h3>🔍 Enter Your Order ID</h3>
+                <div class="tracking-search-group">
+                    <input type="text" class="form-input tracking-input" id="trackingInput" placeholder="e.g. ORD-M5K8X2AB">
+                    <button class="btn btn-primary" id="trackBtn" onclick="trackOrder()">Track Order</button>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="recent-orders" id="recentOrders">
+                    <h4>📋 Recent Orders</h4>
+                    <div id="recentOrdersList"></div>
+                </div>
+            </div>
+
+            <!-- Tracking Results -->
+            <div class="tracking-result" id="trackingResult" style="display:none;">
+                <div class="tracking-card">
+                    <div class="tracking-header">
+                        <div>
+                            <h3 id="trackOrderId">Order #ORD-XXXXX</h3>
+                            <span class="tracking-date" id="trackOrderDate"></span>
+                        </div>
+                        <span class="tracking-status-badge" id="trackStatusBadge">Processing</span>
+                    </div>
+
+                    <!-- Progress Steps -->
+                    <div class="tracking-progress">
+                        <div class="progress-step active" id="step1">
+                            <div class="step-icon">📋</div>
+                            <div class="step-info">
+                                <h4>Order Received</h4>
+                                <p>Your order has been confirmed</p>
+                            </div>
+                            <span class="step-time" id="step1Time"></span>
+                        </div>
+                        <div class="progress-line" id="line1"></div>
+                        <div class="progress-step" id="step2">
+                            <div class="step-icon">👨‍🍳</div>
+                            <div class="step-info">
+                                <h4>Preparing</h4>
+                                <p>Chef is preparing your food</p>
+                            </div>
+                            <span class="step-time" id="step2Time"></span>
+                        </div>
+                        <div class="progress-line" id="line2"></div>
+                        <div class="progress-step" id="step3">
+                            <div class="step-icon">🚗</div>
+                            <div class="step-info">
+                                <h4>Out for Delivery</h4>
+                                <p>Your order is on its way</p>
+                            </div>
+                            <span class="step-time" id="step3Time"></span>
+                        </div>
+                        <div class="progress-line" id="line3"></div>
+                        <div class="progress-step" id="step4">
+                            <div class="step-icon">✅</div>
+                            <div class="step-info">
+                                <h4>Delivered</h4>
+                                <p>Enjoy your meal!</p>
+                            </div>
+                            <span class="step-time" id="step4Time"></span>
+                        </div>
+                    </div>
+
+                    <!-- Order Details -->
+                    <div class="tracking-order-details" id="trackOrderDetails">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Contact Driver -->
+                    <div class="tracking-driver">
+                        <h4>📞 Need Help?</h4>
+                        <div class="driver-actions">
+                            <a href="tel:+923284461097" class="btn btn-glass">
+                                📞 Call Restaurant
+                            </a>
+                            <a href="https://wa.me/923284461097?text=Hi%2C%20I%20need%20help%20with%20my%20order" target="_blank" class="btn btn-primary">
+                                📱 WhatsApp Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Order Found -->
+            <div class="tracking-not-found" id="trackingNotFound" style="display:none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>Order Not Found</h3>
+                <p>Please check your order ID and try again</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Savoria. Crafted with ❤️ by <strong>Rehmat Developers</strong> | Lead: Muhammad Waleed</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+    <script>
+        // Load recent orders
+        function loadRecentOrders() {
+            const orders = JSON.parse(localStorage.getItem('savoria_orders') || '[]');
+            const list = document.getElementById('recentOrdersList');
+            const container = document.getElementById('recentOrders');
+
+            if (orders.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            list.innerHTML = orders.slice(-5).reverse().map(order => `
+                <div class="recent-order-item" onclick="document.getElementById('trackingInput').value='${order.id}'; trackOrder();">
+                    <span class="recent-order-id">${order.id}</span>
+                    <span class="recent-order-date">${new Date(order.date).toLocaleDateString()}</span>
+                    <span class="recent-order-total">$${order.total.toFixed(2)}</span>
+                    <span class="recent-order-status">${order.status || 'received'}</span>
+                </div>
+            `).join('');
+        }
+
+        function trackOrder() {
+            const orderId = document.getElementById('trackingInput').value.trim();
+            if (!orderId) {
+                showToast('Please enter an order ID', 'error');
+                return;
+            }
+
+            const orders = JSON.parse(localStorage.getItem('savoria_orders') || '[]');
+            const order = orders.find(o => o.id === orderId);
+
+            if (!order) {
+                document.getElementById('trackingResult').style.display = 'none';
+                document.getElementById('trackingNotFound').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('trackingNotFound').style.display = 'none';
+            document.getElementById('trackingResult').style.display = 'block';
+
+            // Display order info
+            document.getElementById('trackOrderId').textContent = `Order #${order.id}`;
+            document.getElementById('trackOrderDate').textContent = new Date(order.date).toLocaleString();
+
+            // Simulate progress based on time elapsed
+            const elapsed = (Date.now() - new Date(order.date).getTime()) / 1000 / 60; // minutes
+            let currentStep = 1;
+            if (elapsed > 2) currentStep = 2;
+            if (elapsed > 10) currentStep = 3;
+            if (elapsed > 30) currentStep = 4;
+
+            const statusLabels = { 1: 'Order Received', 2: 'Preparing', 3: 'Out for Delivery', 4: 'Delivered' };
+            const statusColors = { 1: '#F59E0B', 2: '#3B82F6', 3: '#8B5CF6', 4: '#22C55E' };
+            
+            document.getElementById('trackStatusBadge').textContent = statusLabels[currentStep];
+            document.getElementById('trackStatusBadge').style.background = statusColors[currentStep];
+
+            // Update progress steps
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById(`step${i}`);
+                step.classList.remove('active', 'completed');
+                if (i < currentStep) step.classList.add('completed');
+                if (i === currentStep) step.classList.add('active');
+                
+                if (i <= currentStep) {
+                    const time = new Date(new Date(order.date).getTime() + (i - 1) * 8 * 60000);
+                    document.getElementById(`step${i}Time`).textContent = time.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+                } else {
+                    document.getElementById(`step${i}Time`).textContent = '--:--';
+                }
+            }
+            for (let i = 1; i <= 3; i++) {
+                const line = document.getElementById(`line${i}`);
+                line.classList.remove('active');
+                if (i < currentStep) line.classList.add('active');
+            }
+
+            // Order details
+            document.getElementById('trackOrderDetails').innerHTML = `
+                <h4>🛒 Order Items</h4>
+                ${order.items.map(item => `
+                    <div class="booking-detail-row">
+                        <span>${item.name} × ${item.qty}</span>
+                        <span>$${(item.price * item.qty).toFixed(2)}</span>
+                    </div>
+                `).join('')}
+                <div class="receipt-divider"></div>
+                <div class="booking-detail-row total-row">
+                    <span><strong>Total</strong></span>
+                    <span><strong>$${order.total.toFixed(2)}</strong></span>
+                </div>
+            `;
+        }
+
+        loadRecentOrders();
+
+        // Auto-track if URL has order param
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('id')) {
+            document.getElementById('trackingInput').value = urlParams.get('id');
+            trackOrder();
+        }
+    </script>
+</body>
+</html>
