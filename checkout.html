@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savoria - Table Reservation</title>
+    <title>Savoria - Checkout</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -18,12 +18,12 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="reservation.html" class="active">Reserve</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
                 <li><a href="tracking.html">Track Order</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="checkout.html" class="cart-btn" id="cartBtn">
+                <a href="checkout.html" class="cart-btn active" id="cartBtn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                     <span class="cart-count" id="cartCount">0</span>
                 </a>
@@ -37,138 +37,160 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title">Reserve a <span class="text-gradient">Table</span></h1>
-            <p class="page-desc">Secure your perfect dining spot for an unforgettable evening</p>
+            <h1 class="page-title">Your <span class="text-gradient">Cart</span></h1>
+            <p class="page-desc">Review your order and proceed to checkout</p>
         </div>
     </section>
 
-    <!-- Reservation Form -->
+    <!-- Checkout Section -->
     <section class="section">
         <div class="container">
-            <div class="reservation-layout">
-                <div class="reservation-form-card">
-                    <form id="reservationForm">
-                        <div class="form-group">
-                            <label class="form-label">👤 Full Name</label>
-                            <input type="text" class="form-input" id="resName" placeholder="Enter your full name" required>
+            <div class="checkout-layout">
+                <!-- Cart Items -->
+                <div class="checkout-items">
+                    <div class="checkout-card">
+                        <h3 class="checkout-card-title">🛒 Order Items</h3>
+                        <div id="checkoutItemsList">
+                            <!-- Populated by JS -->
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">📧 Email</label>
-                                <input type="email" class="form-input" id="resEmail" placeholder="your@email.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">📱 Phone</label>
-                                <input type="tel" class="form-input" id="resPhone" placeholder="+92 3XX XXXXXXX" required>
-                            </div>
+                        <div class="empty-cart" id="emptyCart" style="display:none;">
+                            <div class="empty-icon">🛒</div>
+                            <h3>Your cart is empty</h3>
+                            <p>Looks like you haven't added any items yet</p>
+                            <a href="menu.html" class="btn btn-primary">Browse Menu</a>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">📅 Date</label>
-                                <input type="date" class="form-input" id="resDate" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">🕐 Time Slot</label>
-                                <select class="form-input" id="resTime" required>
-                                    <option value="">Select Time</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">👥 Number of Guests</label>
-                                <div class="guest-selector" id="guestSelector">
-                                    <button type="button" class="guest-btn minus" id="guestMinus">−</button>
-                                    <span class="guest-count" id="guestCount">2</span>
-                                    <button type="button" class="guest-btn plus" id="guestPlus">+</button>
+                    </div>
+
+                    <!-- Customer Details -->
+                    <div class="checkout-card" id="customerDetailsCard">
+                        <h3 class="checkout-card-title">📋 Delivery Details</h3>
+                        <form id="checkoutForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-input" id="coName" placeholder="Your full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-input" id="coPhone" placeholder="+92 3XX XXXXXXX" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">🏠 Seating Area</label>
-                                <select class="form-input" id="resSeating" required>
-                                    <option value="">Select Area</option>
-                                    <option value="indoor">🏛️ Indoor Main Hall</option>
-                                    <option value="rooftop">🌃 Outdoor Rooftop</option>
-                                    <option value="vip">👑 VIP Lounge</option>
-                                    <option value="garden">🌿 Garden View</option>
-                                </select>
+                                <label class="form-label">Delivery Address</label>
+                                <textarea class="form-input form-textarea" id="coAddress" placeholder="Complete delivery address..." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">💳 Payment Method</label>
+                                <div class="payment-methods" id="paymentMethods">
+                                    <label class="payment-option">
+                                        <input type="radio" name="payment" value="cod" checked>
+                                        <div class="payment-card">
+                                            <span class="payment-icon">💵</span>
+                                            <span>Cash on Delivery</span>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option">
+                                        <input type="radio" name="payment" value="card">
+                                        <div class="payment-card">
+                                            <span class="payment-icon">💳</span>
+                                            <span>Credit/Debit Card</span>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option">
+                                        <input type="radio" name="payment" value="whatsapp">
+                                        <div class="payment-card">
+                                            <span class="payment-icon">📱</span>
+                                            <span>WhatsApp Order</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Card Details (shown conditionally) -->
+                            <div class="card-details" id="cardDetails" style="display:none;">
+                                <div class="form-group">
+                                    <label class="form-label">Card Number</label>
+                                    <input type="text" class="form-input" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Expiry</label>
+                                        <input type="text" class="form-input" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">CVV</label>
+                                        <input type="text" class="form-input" id="cardCvv" placeholder="XXX" maxlength="3">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="checkout-summary">
+                    <div class="checkout-card summary-card">
+                        <h3 class="checkout-card-title">📊 Order Summary</h3>
+                        <div class="summary-rows" id="summaryRows">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="promo-section">
+                            <h4>🎫 Promo Code</h4>
+                            <div class="promo-input-group">
+                                <input type="text" class="form-input" id="promoInput" placeholder="Enter promo code">
+                                <button class="btn btn-glass" id="applyPromoBtn">Apply</button>
+                            </div>
+                            <div class="promo-status" id="promoStatus"></div>
+                        </div>
+
+                        <div class="summary-total">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="summarySubtotal">$0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Delivery Fee</span>
+                                <span id="summaryDelivery">$2.50</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax (8%)</span>
+                                <span id="summaryTax">$0.00</span>
+                            </div>
+                            <div class="summary-row promo-row" id="promoRow" style="display:none;">
+                                <span>Promo Discount</span>
+                                <span class="discount-amount" id="summaryDiscount">-$0.00</span>
+                            </div>
+                            <div class="summary-row total-row">
+                                <span>Total</span>
+                                <span id="summaryTotal">$0.00</span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">📝 Special Requests & Dietary Notes</label>
-                            <textarea class="form-input form-textarea" id="resNotes" placeholder="Any allergies, dietary restrictions, or special occasion details..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="reserveBtn">
-                            <span>Confirm Reservation</span>
+
+                        <button class="btn btn-primary btn-lg btn-block" id="placeOrderBtn" onclick="placeOrder()">
+                            <span>Place Order</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </button>
-                    </form>
-                </div>
-                <div class="reservation-info">
-                    <div class="info-card">
-                        <h3>📍 Restaurant Location</h3>
-                        <p>Raja Jang, Kasur, Pakistan</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>🕐 Operating Hours</h3>
-                        <ul>
-                            <li>Mon - Fri: 11:00 AM – 11:00 PM</li>
-                            <li>Saturday: 10:00 AM – 12:00 AM</li>
-                            <li>Sunday: 12:00 PM – 10:00 PM</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h3>🍽️ Seating Areas</h3>
-                        <div class="seating-preview">
-                            <div class="seating-item">
-                                <span class="seating-icon">🏛️</span>
-                                <div>
-                                    <strong>Indoor Main Hall</strong>
-                                    <p>Classic elegance, 80 seats</p>
-                                </div>
-                            </div>
-                            <div class="seating-item">
-                                <span class="seating-icon">🌃</span>
-                                <div>
-                                    <strong>Outdoor Rooftop</strong>
-                                    <p>City skyline views, 40 seats</p>
-                                </div>
-                            </div>
-                            <div class="seating-item">
-                                <span class="seating-icon">👑</span>
-                                <div>
-                                    <strong>VIP Lounge</strong>
-                                    <p>Exclusive private dining, 20 seats</p>
-                                </div>
-                            </div>
-                            <div class="seating-item">
-                                <span class="seating-icon">🌿</span>
-                                <div>
-                                    <strong>Garden View</strong>
-                                    <p>Natural ambiance, 30 seats</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Booking Confirmation Modal -->
-    <div class="modal-overlay" id="bookingModalOverlay">
-        <div class="modal booking-modal" id="bookingModal">
-            <button class="modal-close" id="bookingModalClose">&times;</button>
+    <!-- Order Confirmation Modal -->
+    <div class="modal-overlay" id="orderModalOverlay">
+        <div class="modal" id="orderModal">
+            <button class="modal-close" onclick="document.getElementById('orderModalOverlay').classList.remove('active'); document.body.style.overflow='';">&times;</button>
             <div class="modal-body">
-                <div class="booking-success-icon">✅</div>
-                <h2>Reservation Confirmed!</h2>
-                <p class="booking-id" id="bookingId"></p>
-                <div class="booking-details" id="bookingDetails">
+                <div class="booking-success-icon">🎉</div>
+                <h2>Order Placed Successfully!</h2>
+                <p class="booking-id" id="orderId"></p>
+                <div class="booking-details" id="orderReceipt">
                     <!-- Populated by JS -->
                 </div>
                 <div class="booking-actions">
-                    <button class="btn btn-primary" onclick="printBooking()">🖨️ Print Voucher</button>
-                    <button class="btn btn-glass" onclick="downloadBooking()">📥 Download PDF</button>
+                    <a href="tracking.html" class="btn btn-primary">🔍 Track Order</a>
+                    <button class="btn btn-glass" onclick="printOrderReceipt()">🖨️ Print Receipt</button>
                 </div>
             </div>
         </div>
@@ -188,145 +210,263 @@
 
     <script src="app.js"></script>
     <script>
-        // Set min date to today
-        const dateInput = document.getElementById('resDate');
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.setAttribute('min', today);
-        dateInput.value = today;
+        let promoApplied = null;
+        const PROMO_CODES = {
+            'WELCOME10': { discount: 10, type: 'percent', label: '10% OFF' },
+            'SAVE5': { discount: 5, type: 'flat', label: '$5 OFF' },
+            'FREESHIP': { discount: 2.50, type: 'shipping', label: 'Free Delivery' },
+            'SAVORIA20': { discount: 20, type: 'percent', label: '20% OFF' }
+        };
+        const DELIVERY_FEE = 2.50;
+        const TAX_RATE = 0.08;
 
-        // Generate time slots
-        function generateTimeSlots() {
-            const select = document.getElementById('resTime');
-            const date = document.getElementById('resDate').value;
-            const isToday = date === today;
-            const now = new Date();
-            const currentHour = now.getHours();
-            const currentMin = now.getMinutes();
-            
-            select.innerHTML = '<option value="">Select Time</option>';
-            const slots = [];
-            for (let h = 11; h <= 22; h++) {
-                for (let m = 0; m < 60; m += 30) {
-                    if (isToday && (h < currentHour || (h === currentHour && m <= currentMin))) continue;
-                    const hour12 = h > 12 ? h - 12 : h;
-                    const ampm = h >= 12 ? 'PM' : 'AM';
-                    const timeStr = `${hour12}:${m === 0 ? '00' : '30'} ${ampm}`;
-                    const val = `${h}:${m === 0 ? '00' : '30'}`;
-                    slots.push(`<option value="${val}">${timeStr}</option>`);
-                }
+        function renderCheckoutItems() {
+            const cart = getCart();
+            const list = document.getElementById('checkoutItemsList');
+            const emptyEl = document.getElementById('emptyCart');
+            const detailsCard = document.getElementById('customerDetailsCard');
+
+            if (cart.length === 0) {
+                list.innerHTML = '';
+                emptyEl.style.display = 'block';
+                detailsCard.style.display = 'none';
+                updateSummary();
+                return;
             }
-            select.innerHTML += slots.join('');
+
+            emptyEl.style.display = 'none';
+            detailsCard.style.display = 'block';
+
+            list.innerHTML = cart.map(item => `
+                <div class="checkout-item">
+                    <img src="${item.image}" alt="${item.name}" class="checkout-item-img">
+                    <div class="checkout-item-info">
+                        <h4>${item.name}</h4>
+                        <span class="checkout-item-price">$${item.price.toFixed(2)}</span>
+                    </div>
+                    <div class="checkout-item-controls">
+                        <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">−</button>
+                        <span class="qty-value">${item.qty}</span>
+                        <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                    </div>
+                    <span class="checkout-item-total">$${(item.price * item.qty).toFixed(2)}</span>
+                    <button class="checkout-item-remove" onclick="removeFromCart('${item.id}')">🗑️</button>
+                </div>
+            `).join('');
+
+            updateSummary();
         }
-        generateTimeSlots();
-        dateInput.addEventListener('change', generateTimeSlots);
 
-        // Guest Counter
-        let guestCount = 2;
-        document.getElementById('guestMinus').addEventListener('click', () => {
-            if (guestCount > 1) {
-                guestCount--;
-                document.getElementById('guestCount').textContent = guestCount;
+        function updateQuantity(id, delta) {
+            let cart = getCart();
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+                localStorage.setItem('savoria_cart', JSON.stringify(cart));
+                renderCheckoutItems();
+                updateCartCount();
             }
-        });
-        document.getElementById('guestPlus').addEventListener('click', () => {
-            if (guestCount < 12) {
-                guestCount++;
-                document.getElementById('guestCount').textContent = guestCount;
+        }
+
+        function removeFromCart(id) {
+            let cart = getCart().filter(i => i.id !== id);
+            localStorage.setItem('savoria_cart', JSON.stringify(cart));
+            renderCheckoutItems();
+            updateCartCount();
+            showToast('Item removed from cart', 'info');
+        }
+
+        function updateSummary() {
+            const cart = getCart();
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            let delivery = DELIVERY_FEE;
+            let discount = 0;
+            let tax = subtotal * TAX_RATE;
+
+            if (promoApplied) {
+                const promo = PROMO_CODES[promoApplied];
+                if (promo.type === 'percent') discount = subtotal * (promo.discount / 100);
+                else if (promo.type === 'flat') discount = promo.discount;
+                else if (promo.type === 'shipping') delivery = 0;
+            }
+
+            const total = Math.max(0, subtotal + delivery + tax - discount);
+
+            document.getElementById('summarySubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('summaryDelivery').textContent = `$${delivery.toFixed(2)}`;
+            document.getElementById('summaryTax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('summaryDiscount').textContent = `-$${discount.toFixed(2)}`;
+            document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                document.getElementById('placeOrderBtn').disabled = true;
             } else {
-                document.getElementById('guestCount').textContent = '12+';
+                document.getElementById('placeOrderBtn').disabled = false;
             }
+        }
+
+        // Promo Code
+        document.getElementById('applyPromoBtn').addEventListener('click', () => {
+            const code = document.getElementById('promoInput').value.toUpperCase().trim();
+            const statusEl = document.getElementById('promoStatus');
+            const promoRow = document.getElementById('promoRow');
+
+            if (PROMO_CODES[code]) {
+                promoApplied = code;
+                statusEl.innerHTML = `<span class="promo-success">✅ Code "${code}" applied — ${PROMO_CODES[code].label}!</span>`;
+                promoRow.style.display = 'flex';
+                showToast(`Promo code applied: ${PROMO_CODES[code].label}`, 'success');
+            } else {
+                promoApplied = null;
+                statusEl.innerHTML = `<span class="promo-error">❌ Invalid promo code</span>`;
+                promoRow.style.display = 'none';
+                showToast('Invalid promo code', 'error');
+            }
+            updateSummary();
         });
 
-        // Form Submission
-        let bookingData = null;
-        document.getElementById('reservationForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('reserveBtn');
+        // Payment method toggle
+        document.querySelectorAll('input[name="payment"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                document.getElementById('cardDetails').style.display = e.target.value === 'card' ? 'block' : 'none';
+            });
+        });
+
+        // Place Order
+        async function placeOrder() {
+            const cart = getCart();
+            if (cart.length === 0) return;
+
+            const name = document.getElementById('coName').value;
+            const phone = document.getElementById('coPhone').value;
+            const address = document.getElementById('coAddress').value;
+            const payment = document.querySelector('input[name="payment"]:checked').value;
+
+            if (!name || !phone || !address) {
+                showToast('Please fill in all delivery details', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('placeOrderBtn');
             btn.innerHTML = '<span class="spinner"></span> Processing...';
             btn.disabled = true;
 
-            const formData = {
-                name: document.getElementById('resName').value,
-                email: document.getElementById('resEmail').value,
-                phone: document.getElementById('resPhone').value,
-                date: document.getElementById('resDate').value,
-                time: document.getElementById('resTime').value,
-                guests: guestCount,
-                seating: document.getElementById('resSeating').value,
-                notes: document.getElementById('resNotes').value
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            let delivery = DELIVERY_FEE;
+            let discount = 0;
+            let tax = subtotal * TAX_RATE;
+            if (promoApplied) {
+                const promo = PROMO_CODES[promoApplied];
+                if (promo.type === 'percent') discount = subtotal * (promo.discount / 100);
+                else if (promo.type === 'flat') discount = promo.discount;
+                else if (promo.type === 'shipping') delivery = 0;
+            }
+            const total = Math.max(0, subtotal + delivery + tax - discount);
+
+            const orderData = {
+                customer: { name, phone, address },
+                items: cart,
+                payment,
+                subtotal, delivery, tax, discount, total,
+                promo: promoApplied
             };
 
-            let confirmationId;
+            let orderId;
             try {
-                const res = await fetch('https://savoria-restaurant-api.onrender.com/api/reserve', {
+                const res = await fetch('https://savoria-restaurant-api.onrender.com/api/order', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify(orderData),
                     signal: AbortSignal.timeout(5000)
                 });
                 const data = await res.json();
-                confirmationId = data.reservationId || data.id;
+                orderId = data.orderId || data.id;
             } catch (e) {
-                confirmationId = 'SVR-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 4).toUpperCase();
+                orderId = 'ORD-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 4).toUpperCase();
             }
 
-            bookingData = { ...formData, id: confirmationId };
+            // Save order to localStorage
+            const orders = JSON.parse(localStorage.getItem('savoria_orders') || '[]');
+            orders.push({ id: orderId, ...orderData, date: new Date().toISOString(), status: 'received' });
+            localStorage.setItem('savoria_orders', JSON.stringify(orders));
 
-            const seatingLabels = { indoor: '🏛️ Indoor Main Hall', rooftop: '🌃 Outdoor Rooftop', vip: '👑 VIP Lounge', garden: '🌿 Garden View' };
-            const dateObj = new Date(formData.date + 'T00:00:00');
-            const dateStr = dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-            document.getElementById('bookingId').textContent = `Booking ID: ${confirmationId}`;
-            document.getElementById('bookingDetails').innerHTML = `
-                <div class="booking-detail-row"><span>Guest Name</span><span>${formData.name}</span></div>
-                <div class="booking-detail-row"><span>Date</span><span>${dateStr}</span></div>
-                <div class="booking-detail-row"><span>Time</span><span>${formData.time}</span></div>
-                <div class="booking-detail-row"><span>Guests</span><span>${formData.guests} Person(s)</span></div>
-                <div class="booking-detail-row"><span>Seating</span><span>${seatingLabels[formData.seating] || formData.seating}</span></div>
-                ${formData.notes ? `<div class="booking-detail-row"><span>Notes</span><span>${formData.notes}</span></div>` : ''}
-                <div class="booking-detail-row"><span>Email</span><span>${formData.email}</span></div>
-                <div class="booking-detail-row"><span>Phone</span><span>${formData.phone}</span></div>
+            // Show receipt
+            const paymentLabels = { cod: '💵 Cash on Delivery', card: '💳 Credit/Debit Card', whatsapp: '📱 WhatsApp Order' };
+            document.getElementById('orderId').textContent = `Order ID: ${orderId}`;
+            document.getElementById('orderReceipt').innerHTML = `
+                <div class="receipt-header">
+                    <strong>🔥 Savoria Restaurant</strong>
+                    <span>${new Date().toLocaleString()}</span>
+                </div>
+                <div class="receipt-divider"></div>
+                ${cart.map(item => `
+                    <div class="booking-detail-row">
+                        <span>${item.name} × ${item.qty}</span>
+                        <span>$${(item.price * item.qty).toFixed(2)}</span>
+                    </div>
+                `).join('')}
+                <div class="receipt-divider"></div>
+                <div class="booking-detail-row"><span>Subtotal</span><span>$${subtotal.toFixed(2)}</span></div>
+                <div class="booking-detail-row"><span>Delivery</span><span>$${delivery.toFixed(2)}</span></div>
+                <div class="booking-detail-row"><span>Tax (8%)</span><span>$${tax.toFixed(2)}</span></div>
+                ${discount > 0 ? `<div class="booking-detail-row"><span>Discount${promoApplied ? ` (${promoApplied})` : ''}</span><span class="discount-amount">-$${discount.toFixed(2)}</span></div>` : ''}
+                <div class="receipt-divider"></div>
+                <div class="booking-detail-row total-row"><span><strong>Total</strong></span><span><strong>$${total.toFixed(2)}</strong></span></div>
+                <div class="receipt-divider"></div>
+                <div class="booking-detail-row"><span>Payment</span><span>${paymentLabels[payment]}</span></div>
+                <div class="booking-detail-row"><span>Customer</span><span>${name}</span></div>
+                <div class="booking-detail-row"><span>Phone</span><span>${phone}</span></div>
+                <div class="booking-detail-row"><span>Address</span><span>${address}</span></div>
             `;
 
-            document.getElementById('bookingModalOverlay').classList.add('active');
+            // WhatsApp order
+            if (payment === 'whatsapp') {
+                const msg = encodeURIComponent(`🔥 *SAVORIA ORDER*\n\nOrder ID: ${orderId}\nName: ${name}\nPhone: ${phone}\n\n*Items:*\n${cart.map(i => `• ${i.name} × ${i.qty} = $${(i.price*i.qty).toFixed(2)}`).join('\n')}\n\n*Total: $${total.toFixed(2)}*\n\nAddress: ${address}`);
+                window.open(`https://wa.me/923284461097?text=${msg}`, '_blank');
+            }
+
+            document.getElementById('orderModalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
-            btn.innerHTML = '<span>Confirm Reservation</span>';
+
+            // Clear cart
+            localStorage.setItem('savoria_cart', JSON.stringify([]));
+            renderCheckoutItems();
+            updateCartCount();
+
+            btn.innerHTML = '<span>Place Order</span>';
             btn.disabled = false;
-            showToast('Reservation confirmed successfully!', 'success');
-        });
+            showToast('Order placed successfully!', 'success');
+        }
 
-        document.getElementById('bookingModalClose').addEventListener('click', () => {
-            document.getElementById('bookingModalOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        function printBooking() {
-            const content = document.getElementById('bookingModal').innerHTML;
+        function printOrderReceipt() {
+            const content = document.getElementById('orderModal').innerHTML;
             const win = window.open('', '_blank');
             win.document.write(`
-                <html><head><title>Savoria - Booking Voucher</title>
+                <html><head><title>Savoria - Order Receipt</title>
                 <style>
-                    body { font-family: 'Poppins', sans-serif; padding: 40px; color: #1a1a1a; }
+                    body { font-family: 'Poppins', sans-serif; padding: 40px; color: #1a1a1a; max-width: 400px; margin: 0 auto; }
                     h2 { color: #FF4757; text-align: center; }
-                    .booking-success-icon { text-align: center; font-size: 60px; }
-                    .booking-id { text-align: center; font-weight: 600; margin: 10px 0; font-size: 18px; color: #F59E0B; }
-                    .booking-detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+                    .booking-success-icon { text-align: center; font-size: 50px; }
+                    .booking-id { text-align: center; font-weight: 600; color: #F59E0B; }
+                    .booking-detail-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
+                    .receipt-header { text-align: center; margin-bottom: 10px; }
+                    .receipt-header span { display: block; color: #888; font-size: 12px; }
+                    .receipt-divider { border-top: 1px dashed #ccc; margin: 8px 0; }
+                    .total-row { font-size: 16px; }
+                    .discount-amount { color: #22c55e; }
                     .booking-actions, .modal-close { display: none; }
-                    .booking-details { max-width: 500px; margin: 0 auto; }
                 </style></head>
-                <body>
-                    <h1 style="text-align:center;">🔥 Savoria Restaurant</h1>
-                    ${content}
-                    <p style="text-align:center; margin-top:30px; color:#888;">Thank you for choosing Savoria! | +92 (328) 4461097</p>
-                </body></html>
+                <body>${content}</body></html>
             `);
             win.document.close();
             win.print();
         }
 
-        function downloadBooking() {
-            printBooking(); // Uses print dialog which allows saving as PDF
-        }
+        // Init
+        renderCheckoutItems();
     </script>
 </body>
 </html>
